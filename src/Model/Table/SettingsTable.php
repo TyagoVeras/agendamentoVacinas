@@ -74,6 +74,10 @@ class SettingsTable extends Table
         $validator
             ->scalar('celsecretaria')
             ->allowEmptyString('celsecretaria');
+        
+        $validator
+            ->scalar('agendamentoliberado')
+            ->allowEmptyString('agendamentoliberado');
 
         return $validator;
     }

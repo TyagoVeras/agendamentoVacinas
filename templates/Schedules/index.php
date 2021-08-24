@@ -13,6 +13,9 @@
     <?= $this->Html->link(__('VACINADOS'), ['action' => 'index',3], ['class' => 'button vacinados']) ?>
     
     <?= $this->Html->link(__('AUSENTE'), ['action' => 'index',4], ['class' => 'button semcomparecimento']) ?>
+
+    <?= $this->Html->link(__('RELATÓRIO'), ['action' => 'indexpessoas'], ['class' => 'button']) ?>
+
 <br>
 <small>Legenda nas ações: <span style="color:#000">V</span> -> Ver dados do registro | <span style="color:#000">D</span> -> Desvincular um agendamento de uma pessoa | <span style="color:#000">E</span> -> Excluir registro</small>
 <div class="schedules index content">

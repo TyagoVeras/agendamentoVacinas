@@ -32,5 +32,6 @@ class Setting extends Entity
         'secret' => true,
         'tempodeatendimento' => true,
         'celsecretaria' => true,
+        'agendamentoliberado' => true,
     ];
 }

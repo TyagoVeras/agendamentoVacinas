@@ -31,11 +31,14 @@ class SchedulesController extends AppController
             $idPerson = $schedule->person_id;
             $schedule->usercheck = $this->userLogado->id;
             $novadata = new FrozenTime($this->request->getData('novo.data'));
+            
             //verificando se a data do proximo agendamento é menor ou igual a do dia atual
-            if ( $novadata <= $dataPrimeiraDose) {
-                $this->Flash->error(__('A data desse agendamento nao pode ser no mesmo dia ou menor do que a data do agendamento passado'));
-                return $this->redirect(['action' => 'checkin', $id]);
-            }
+            // if ($estaImunizado == 'null' && $foiVacinado == 1) {
+            //     if ($novadata <= $dataPrimeiraDose) {
+            //         $this->Flash->error(__('A data desse agendamento nao pode ser no mesmo dia ou menor do que a data do agendamento passado'));
+            //         return $this->redirect(['action' => 'checkin', $id]);
+            //     }
+            // }
             if ($this->Schedules->save($schedule)) {
                 $this->Flash->success(__('CheckIn realizado com sucesso'));
                 if ($estaImunizado == 'null' && $foiVacinado == 1) {
@@ -207,6 +210,24 @@ class SchedulesController extends AppController
         $schedules = $this->paginate($query);
 
         $this->set(compact('schedules', 'tipo'));
+    }
+
+    public function indexpessoas()
+    {
+
+        $keydate = $this->request->getQuery('keydate');
+        $keytimeBegin = $this->request->getQuery('keytimeBegin');
+        $keytimeEnd = $this->request->getQuery('keytimeEnd');
+        
+        if ($keydate || $keytimeBegin || $keytimeEnd) {
+            $query = $this->Schedules->find('all')->contain(['People'])
+                ->where(['And' => ['data' => $keydate, 'hora >=' => $keytimeBegin ?? '00:00:00', 'hora <= ' => $keytimeEnd ?? '23:59:59', 'person_id IS NOT' => null, 'vacinado'=>0]]);
+        } else {
+            $query = $this->Schedules->find('all')->contain(['People'])->where(['person_id IS NOT' => null, 'vacinado'=>0]);
+        }
+        $schedules = $query;
+
+        $this->set(compact('schedules'));
     }
 
     /**

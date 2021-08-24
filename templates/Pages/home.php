@@ -66,7 +66,13 @@ $cakeDescription = 'Agendamentos online de Vacinas - Luis Correia';
                 <div class="row">
                     <div class="column">
                         <div class="message default text-center">
-                            <?= $this->Html->link('Clique aqui para fazer o agendamento da vacina', ['controller' => 'people', 'action' => 'existPeople'], ['escape' => false, 'class' => '']) ?>
+                            <?php
+                            if($settings->agendamentoliberado == '1'){
+                            echo $this->Html->link('Clique aqui para fazer o agendamento da vacina', ['controller' => 'people', 'action' => 'existPeople'], ['escape' => false, 'class' => '']);
+                            }else{
+                             echo 'AGUARDE A LIBERAÇÃO DO AGENDAMENTO NO DIA 25/06/2021 ÀS 17h';
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

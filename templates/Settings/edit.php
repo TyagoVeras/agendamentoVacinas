@@ -26,6 +26,8 @@
                 $tempoatendimento = ['120'=>'2 minutos','300' => '5 minutos', '600' => '10 minutos', '900' => '15 minutos'];
                 echo $this->Form->control('tempodeatendimento',['label'=>'Tempo de atendimento','options'=>$tempoatendimento,'empty'=>false]);
                 echo $this->Form->control('celsecretaria', ['label' => 'Celular/Whatsapp', 'class' => 'cel']);
+                $optionsAgendamentoLiberado = ['0' => 'Não', '1'=>'Sim'];
+                echo $this->Form->control('agendamentoliberado',['options'=>$optionsAgendamentoLiberado,'empty'=>null]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Salvar')) ?>

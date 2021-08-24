@@ -107,9 +107,9 @@ class UsersTable extends Table
     public function beforeSave(EventInterface $event)
     {
         $entity = $event->getData('entity');
-        if ($entity->isNew()) {
-            $entity->password = Security::hash($entity->password, 'sha256');
-        }
+
+        $entity->password = Security::hash($entity->password, 'sha256');
+
         return true;
     }
 }
